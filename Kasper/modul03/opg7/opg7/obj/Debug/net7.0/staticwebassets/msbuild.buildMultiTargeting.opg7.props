@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\opg7.props" />
+</Project>
