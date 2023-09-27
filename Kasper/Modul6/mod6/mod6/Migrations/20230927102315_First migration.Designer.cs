@@ -10,8 +10,8 @@ using Model;
 namespace mod6.Migrations
 {
     [DbContext(typeof(TaskContext))]
-    [Migration("20230927100846_Logic changed")]
-    partial class Logicchanged
+    [Migration("20230927102315_First migration")]
+    partial class Firstmigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -47,9 +47,14 @@ namespace mod6.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<long>("UserId")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("TodoID");
 
                     b.HasIndex("BoardID");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Todos", (string)null);
                 });
@@ -77,7 +82,15 @@ namespace mod6.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Model.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Board");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Model.Board", b =>

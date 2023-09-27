@@ -15,5 +15,6 @@ namespace Model
         public string Category { get; set; }
         public int BoardID { get; set; }
         public Board Board { get; set; }
+        public User User { get; set; }
     }
 }

@@ -5,7 +5,7 @@
 namespace mod6.Migrations
 {
     /// <inheritdoc />
-    public partial class Logicchanged : Migration
+    public partial class Firstmigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -43,7 +43,8 @@ namespace mod6.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(type: "TEXT", nullable: false),
                     Category = table.Column<string>(type: "TEXT", nullable: false),
-                    BoardID = table.Column<int>(type: "INTEGER", nullable: false)
+                    BoardID = table.Column<int>(type: "INTEGER", nullable: false),
+                    UserId = table.Column<long>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -54,12 +55,23 @@ namespace mod6.Migrations
                         principalTable: "Boards",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Todos_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "UserId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Todos_BoardID",
                 table: "Todos",
                 column: "BoardID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Todos_UserId",
+                table: "Todos",
+                column: "UserId");
         }
 
         /// <inheritdoc />
@@ -69,10 +81,10 @@ namespace mod6.Migrations
                 name: "Todos");
 
             migrationBuilder.DropTable(
-                name: "Users");
+                name: "Boards");
 
             migrationBuilder.DropTable(
-                name: "Boards");
+                name: "Users");
         }
     }
 }

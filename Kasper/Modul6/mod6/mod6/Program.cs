@@ -13,12 +13,16 @@ using (var db = new TaskContext())
         var newBoard = new Board();
         db.Boards.Add(newBoard);
 
+        var newUser = new User("Kasper");
+        db.Users.Add(newUser);
+
         // Create multiple tasks for the board
         var task1 = new Todo
         {
             Name = "Task 3",
             Category = "To Do",
-            Board = newBoard // Set the board for this task
+            Board = newBoard, // Set the board for this task
+            User = newUser
         };
         db.Todos.Add(task1);
 
@@ -26,7 +30,8 @@ using (var db = new TaskContext())
         {
             Name = "Task 4",
             Category = "In Progress",
-            Board = newBoard // Set the board for this task
+            Board = newBoard, // Set the board for this task
+            User = newUser
         };
         db.Todos.Add(task2);
 
@@ -35,35 +40,6 @@ using (var db = new TaskContext())
 
         Console.WriteLine("Data inserted successfully.");
 
-
-        /*
-        Console.WriteLine($"Database path: {db.DbPath}.");
-
-        // Create
-        Console.WriteLine("Indsætter i DB");
-        db.Add(new TodoTask("Jeg hedder Kasper", "navn", false));
-        db.SaveChanges();
-
-        // Read
-        Console.WriteLine("Find det sidste task");
-        var lastTask = db.Tasks
-            .OrderBy(b => b.TodoTaskId)
-            .Last();
-        Console.WriteLine($"Text: {lastTask.Text}");
-
-        // Update
-        Console.WriteLine("Update en task");
-        var blog = db.Tasks.Single(b => b.Text == "Jeg hedder Jens");
-        blog.Text = "http://example.com/blog";
-        db.SaveChanges();
-        Console.WriteLine("Update gemt");
-
-        // Delete
-        Console.WriteLine("Delete en task");
-        var deleteTask = db.Tasks.Single(b => b.Text == "http://example.com/blog");
-        db.Tasks.Remove(deleteTask);
-        db.SaveChanges();
-        Console.WriteLine("Update gemt");
-        */
+        //Næste opgave se slide 10 (Samling af columns)
     }
 }

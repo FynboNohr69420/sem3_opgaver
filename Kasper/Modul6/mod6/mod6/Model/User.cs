@@ -11,6 +11,10 @@ namespace Model
         public User()
         {
         }
+        public User(string name)
+        {
+            this.Navn = name;
+        }
         public long UserId { get; set; }
         public string Navn { get; set; }
     }
