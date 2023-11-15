@@ -83,7 +83,7 @@ public class HashSetChaining : HashSet
                 
                 if (previous != null) // If not the head of the linked list
                 {
-                    buckets[h] = bucket.Next;
+                    previous.Next = bucket.Next;
                 }
                 else // If the head of the linked list
                 {
