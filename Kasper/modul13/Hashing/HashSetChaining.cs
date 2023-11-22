@@ -69,7 +69,7 @@ public class HashSetChaining : HashSet
         return !found;
     }
 
-    public bool Remove(Object x)
+    public bool Remove(Object x) // this might be overly complicated, but it works. I can't make it work without a 'previous' value
     {
         int h = HashValue(x);
 
